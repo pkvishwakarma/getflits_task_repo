@@ -1,0 +1,73 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.navContainer{
+    display: grid;
+    grid-template-columns: 3fr 9fr;
+    column-gap:1em;
+    margin: 5em 8em 0px 8em;
+}
+
+.homepageHeading{
+    display: flex;
+    justify-content: center;
+    padding-top: 1em;
+    color: #311b1bf5;
+}
+
+.headerContainer{
+    display: grid;
+    grid-template-columns:4fr 2fr 6fr;
+    padding: 3em 8em 0px 8em;
+}
+
+.headerTitle{
+    font-size: 1.4em;
+    font-weight: 500;
+    color:rgba(128, 128, 128, 0.959)
+}
+
+.iconsContainer{
+    text-align: end;
+    color: #808080;
+}
+
+.optionContainer{
+    color: #808080;
+    margin: auto;
+}
+.searchIcon,.userIcon,.home,.catelog{
+    margin-right: 0.7em;
+}
+
+.navbar_navigation_Container{
+    background-color: rgb(32, 2, 100);
+    border-bottom-left-radius: 0.4em;
+    border-bottom-right-radius: 0.4em;
+}
+
+.navbar_navigation_Container ul li{
+    list-style: none;
+    color: white;
+    font-weight: 200;
+    padding: 0.7em 1em;
+}
+
+.navbar_navigation_Container ul .linkStyle{
+    text-decoration:none;
+}
+
+.navbar_navigation_Container ul li:hover{
+    background-color: rgb(121,103,162);
+    border-top-left-radius: 0.4em;
+    border-top-right-radius: 0.4em;
+    font-weight:600;
+}
+
+.navbar_navigation_Container ul .active li{
+    background-color: rgb(121,103,162);
+    margin-left:0.5em ;
+}
