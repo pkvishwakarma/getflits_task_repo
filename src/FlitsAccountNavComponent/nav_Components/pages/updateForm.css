@@ -1,0 +1,98 @@
+.contact_parent {
+    display: flex;
+    width: 35vw;
+    border:0.3px solid rgba(0, 0, 0, 0.582);
+    outline: unset;
+    border-radius: 5px;
+    margin-top: 0.4em;
+    margin-bottom: 0.8em;
+}
+
+.contact_parent input[type="text"]{
+    width: 35px;
+    font-size: 16px;
+    outline: unset;
+    border: none;
+    text-align: center;
+}
+
+.contact_parent input[type="tel"]{
+    width: 78%;
+    font-size: 16px;
+    outline:unset;
+    border: none;
+}
+
+.country-selector{
+    width: 55px;
+    font-size: 16px;
+    position: relative;
+}
+
+#countryDropdown {
+    width: 70px;
+    padding: 8px;
+    font-size: 16px;
+    outline: unset;
+    border: none;
+    border-left:0.3px solid rgba(0, 0, 0, 0.582);
+}
+
+#countryDropdown~span{
+    position:absolute;
+    top:5px;
+    left: 10px;
+}
+
+.updateFormContainer{
+    width: 50vw;
+}
+
+.inputContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+.inputContainer input, .inputContainer select{
+    width: 70%;
+    outline: unset;
+    border:0.3px solid rgba(0, 0, 0, 0.582);
+    padding: 10px 8px;
+    border-radius: 5px;
+    margin-top: 0.4em;
+    margin-bottom: 0.8em;
+}
+
+.formSaveBtn{
+    background-color: rgb(32, 2, 100);
+    border-radius: 5px;
+    padding: 10px 20px;
+    color:rgb(255, 255, 255);
+    border: 1px solid rgb(32, 2, 100);
+    font-weight: 700;
+    margin-top: 1.2em;
+    cursor:pointer;
+}
+
+.formSaveBtn:hover{
+    background-color: rgb(102,106,152);
+    border: 1px solid rgb(102,106,152);
+}
+
+.formCancelBtn{
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    padding: 10px 20px;
+    color:rgb(32, 2, 100);
+    border: 1px solid rgb(32, 2, 100);
+    font-weight: 700;
+    margin-top: 1.2em;
+    cursor:pointer;
+    margin-right: 0.8em;
+}
+
+.formCancelBtn:hover{
+    background-color: rgb(32, 2, 100);
+    border: 1px solid rgb(32, 2, 100);
+    color:rgb(255, 255, 255);
+}

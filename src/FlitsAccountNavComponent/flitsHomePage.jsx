@@ -2,14 +2,15 @@ import React from 'react';
 import './navbar.css';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './navbar';
-import MyProfile from './myprofile';
-import DeliveryAdd from './deliveryAdd';
-import MyOrder from './myOrders';
-import TopOrderedProduct from './topOrderedProduct';
-import MyWishlist from './myWishlist';
-import MyCredit from './myCredit';
-import HowToManageCredit from './howToManageCredit';
-import ChangePassword from './changePassword';
+import MyProfile from './nav_Components/pages/myprofile';
+import DeliveryAdd from './nav_Components/pages/deliveryAdd';
+import MyOrder from './nav_Components/pages/myOrders';
+import TopOrderedProduct from './nav_Components/pages/topOrderedProduct';
+import MyWishlist from './nav_Components/pages/myWishlist';
+import MyCredit from './nav_Components/pages/myCredit';
+import HowToManageCredit from './nav_Components/pages/howToManageCredit';
+import ChangePassword from './nav_Components/pages/changePassword';
+import UpdateForm from './nav_Components/pages/updateForm';
 
 export default function FlitsHomePage() {
     return (
@@ -26,14 +27,15 @@ export default function FlitsHomePage() {
             </div>
             <Routes>
                 <Route path='/' element={<Navbar />}>
-                    <Route path='myprofile' element={<MyProfile />} />
-                    <Route path='delivery' element={<DeliveryAdd />} />
-                    <Route path='myorder' element={<MyOrder />} />
-                    <Route path='toporderedproduct' element={<TopOrderedProduct />} />
-                    <Route path='mywishlist' element={<MyWishlist />} />
-                    <Route path='mycredit' element={<MyCredit />} />
-                    <Route path='managecredit' element={<HowToManageCredit />} />
-                    <Route path='changepassword' element={<ChangePassword />} />
+                    <Route path='/myprofile' element={<MyProfile />} />
+                    <Route path='/delivery' element={<DeliveryAdd />} />
+                    <Route path='/myorder' element={<MyOrder />} />
+                    <Route path='/toporderedproduct' element={<TopOrderedProduct />} />
+                    <Route path='/mywishlist' element={<MyWishlist />} />
+                    <Route path='/mycredit' element={<MyCredit />} />
+                    <Route path='/managecredit' element={<HowToManageCredit />} />
+                    <Route path='/changepassword' element={<ChangePassword />} />
+                    <Route path='/updateform/:id' element={<UpdateForm />} />
                 </Route>
 
             </Routes>

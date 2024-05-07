@@ -1,0 +1,15 @@
+{
+    "users": [
+      {
+        "id": 1,
+        "first_name": "V",
+        "last_name":"Rathod",
+        "email": "vaibhav@getflits.com",
+        "contact_number":"8905020307",
+        "country_callingcode":"+91",
+        "birthdate":"1995-11-10",
+        "gender":"male"
+      }
+    ]
+  }
+  
