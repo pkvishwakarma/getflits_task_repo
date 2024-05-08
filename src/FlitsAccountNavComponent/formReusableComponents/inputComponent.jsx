@@ -14,6 +14,7 @@ export default function FormInputComponent({ template }) {
             )
         })
     }
+
     return (
         <>
             {
@@ -22,3 +23,32 @@ export default function FormInputComponent({ template }) {
         </>
     )
 }
+
+
+//Cut Paste This Template to that component where you want to create dynamice input field using map iterator..
+//Creating Input Field Template for Input reusable Component..
+    // let template = {
+    //     fields: [
+    //         {
+    //             title: 'First Name :',
+    //             type: 'text',
+    //             name: 'first_name',
+    //             value: editFormData.first_name,
+    //             onchange: handleEditFormChange
+    //         },
+    //         {
+    //             title: 'Last Name :',
+    //             type: 'text',
+    //             name: 'last_name',
+    //             value: editFormData.last_name,
+    //             onchange: handleEditFormChange
+    //         },
+    //         {
+    //             title: 'Email :',
+    //             type: 'email',
+    //             name: 'email',
+    //             value: editFormData.email,
+    //             onchange: handleEditFormChange
+    //         }
+    //     ]
+    // };

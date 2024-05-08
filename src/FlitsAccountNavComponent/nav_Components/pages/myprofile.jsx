@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import userData from '../../../constentData/loginUserData.json';
 import './myprofile.css';
 import { useNavigate } from 'react-router-dom';
+import Slide from '@mui/material/Slide';
+import SnackbarReusableComponent from '../../formReusableComponents/snackbarResuableComponent';
+import FormButtonComponent from '../../formReusableComponents/formButtonComponent';
 
 export default function MyProfile() {
     const [user,setUser] = useState(userData.users[0]);
@@ -16,9 +19,14 @@ export default function MyProfile() {
         gender:'Gender'
     };
 const navigate=useNavigate();
+const [snackbarState, setSnackbarState] = useState({
+    open: false,
+    Transition: Slide,
+});
     
 useEffect(()=>{
         if(localStorageData){
+            setSnackbarState((pre) => { return { ...pre, open: true } });
             return setUser(localStorageData);
         }
         else{
@@ -39,7 +47,8 @@ useEffect(()=>{
                         )
                     }
                 </dl>
-                <button type='button' className='formEditBtn' onClick={()=>{navigate(`/updateform/${user.id}`)}}>Edit</button>
+                <FormButtonComponent fieldInfo={{title:'Edit',className:'formEditBtn',type:'button',onclick:()=>{navigate(`/updateform/${user.id}`)}}} />
+                <SnackbarReusableComponent snackbarInfo={{style:'green',message:'Profile Updated Successfully'}} snackbarState={snackbarState} />
             </div>
         </>
     )
