@@ -8,7 +8,7 @@ import FormButtonComponent from '../../formReusableComponents/formButtonComponen
 import SnackbarReusableComponent from '../../formReusableComponents/snackbarResuableComponent';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import {userinfo} from '../../useReducer_reduxComponent/store/features/userinfo/userinfoSlice';
+import {userinfo,isModify} from '../../useReducer_reduxComponent/store/features/userinfo/userinfoSlice';
 
 export default function UpdateForm(props) {
     var {userid,setIsViewProfile}=props;
@@ -49,6 +49,7 @@ export default function UpdateForm(props) {
         e.preventDefault();
         localStorage.setItem('userdata', JSON.stringify(editFormData));
         dispatch(userinfo(JSON.parse(localStorage?.getItem('userdata'))));
+        dispatch(isModify(true));
         setSnackbarState((pre) => { return { ...pre, open: true } });
         setTimeout(() => {
             setIsViewProfile(true);
@@ -77,7 +78,7 @@ export default function UpdateForm(props) {
                     }} setEditFormData={setEditFormData} />
                     <InputFieldReusable fieldInfo={{ title: 'Birthdate :', type: 'date', name: 'birthdate', value: editFormData?.birthdate, onchange: handleEditFormChange, isError:(editFormData.birthdate===''?true:false), errorMsg:'Birthdate is Required' }} />
                     <FormSelectComponent fieldInfo={{title:'Gender :',name:'gender',value:editFormData?.gender,onchange:handleEditFormChange,optValue:['female','male','other'],optText:['Female','Male','Other']}} />
-                    <FormButtonComponent fieldInfo={{title:'Cancle',className:'formCancelBtn',type:'button',onclick:()=>{props.setIsViewProfile(true)}}} />
+                    <FormButtonComponent fieldInfo={{title:'Cancle',className:'formCancelBtn',type:'button',onclick:()=>{setIsViewProfile(true);dispatch(isModify(false))}}} />
                     <FormButtonComponent fieldInfo={{title:'Save',className:'formSaveBtn',type:'Submit',disable:error}} />
                 </form>
                 <SnackbarReusableComponent snackbarInfo={{style:'black',message:'Saving Profile Details..'}} snackbarState={snackbarState} />

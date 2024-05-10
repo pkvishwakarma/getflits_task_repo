@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState={
-    userdata:{...JSON.parse(localStorage.getItem('userdata'))}
+    userdata:{...JSON.parse(localStorage.getItem('userdata'))},
+    isModified:false
 }
 
 export const userSlice=createSlice({
@@ -11,9 +12,12 @@ export const userSlice=createSlice({
         userinfo:(state,action)=>{
             const {id,first_name,last_name,email,contact_number,country_callingcode,birthdate,gender}=action.payload;
             state.userdata={id,first_name,last_name,email,contact_number,country_callingcode,birthdate,gender}
+        },
+        isModify:(state,action)=>{
+            state.isModified=action.payload;
         }
     }
 });
 
-export const {userinfo}=userSlice.actions;
+export const {userinfo,isModify}=userSlice.actions;
 export default userSlice.reducer;
