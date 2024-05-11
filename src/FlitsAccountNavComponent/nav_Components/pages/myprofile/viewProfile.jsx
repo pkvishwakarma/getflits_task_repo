@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './myprofile.css';
 import Slide from '@mui/material/Slide';
-import SnackbarReusableComponent from '../../formReusableComponents/snackbarResuableComponent';
-import FormButtonComponent from '../../formReusableComponents/formButtonComponent';
+import SnackbarReusableComponent from '../../../formReusableComponents/snackbarResuableComponent';
+import FormButtonComponent from '../../../formReusableComponents/formButtonComponent';
 import { useSelector } from 'react-redux';
 
 export default function ViewProfile(props) {

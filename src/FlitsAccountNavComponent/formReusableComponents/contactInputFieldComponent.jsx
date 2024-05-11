@@ -1,13 +1,17 @@
 import React,{useEffect, useState} from "react";
-import '../nav_Components/pages/updateForm.css';
+import '../nav_Components/pages/myprofile/updateForm.css';
 
-export default function ContactInputFieldComponent({contact_template,setEditFormData}) {
+export default function ContactInputFieldComponent({contact_template,setEditFormData,setError}) {
     const [countryData, setCountryData] = useState([]);
     const [countryDetail, setCountryDetail] = useState({
         flag: ''
     });
     var {title,type,name,value,onchange}=contact_template;
     var callingcodeInfo = FetchCountryInfoBasedOnCallingcode();
+    //Using ternary Operator giving dynamic value to quantifire and storing a string as regExp.
+    var telRegExp=(`^\\d{${13-value[0].length}}$`); 
+    //Now Converting string to form of RegExp using new RegExp Method.
+    telRegExp=new RegExp(telRegExp);
 
     // Fetching Country info like (flag,callingcode and Country name)..
     function LoadCountryData() {
@@ -31,8 +35,15 @@ export default function ContactInputFieldComponent({contact_template,setEditForm
         setEditFormData((pre) => { return { ...pre, country_callingcode: callingInfo?.callingcode } });
     }
 
+    //Matching Contact length with RegExp and returning a error msg if Match found Null.
+    function ContactMatch(){
+        var res=value[1].match(telRegExp);
+        return !res && <span style={{color:'red'}}>Invalid Contact Number..</span> 
+    }
+
     useEffect(()=>{
         LoadCountryData();
+        ContactMatch();
         //Handiling callingcodeInfo Variable Undefined error..
         if (callingcodeInfo) {
             LoadCallingcodeCountryDetail();
@@ -40,7 +51,15 @@ export default function ContactInputFieldComponent({contact_template,setEditForm
         else {
             FetchCountryInfoBasedOnCallingcode(); 
         }
-    },[callingcodeInfo])
+
+        //Handling modify form save button disabled based on Contact Matches regExp..
+        if(value[1].match(telRegExp)!==null){
+            setError(false)
+        }
+        else{
+            setError(true);
+        }
+    },[callingcodeInfo,value[1]]);
 
     return (
         <>
@@ -61,6 +80,7 @@ export default function ContactInputFieldComponent({contact_template,setEditForm
                         <span id="flag"><img src={countryDetail?.flag} alt="cf" width={35} /></span>
                     </div>
                 </div>
+                {ContactMatch()}
             </div>
         </>
     )

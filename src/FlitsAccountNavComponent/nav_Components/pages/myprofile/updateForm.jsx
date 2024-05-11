@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import './updateForm.css';
 import Slide from '@mui/material/Slide';
-import ContactInputFieldComponent from '../../formReusableComponents/contactInputFieldComponent';
-import InputFieldReusable from '../../formReusableComponents/inputField_reusable';
-import FormSelectComponent from '../../formReusableComponents/formSelectComponent';
-import FormButtonComponent from '../../formReusableComponents/formButtonComponent';
-import SnackbarReusableComponent from '../../formReusableComponents/snackbarResuableComponent';
+import ContactInputFieldComponent from '../../../formReusableComponents/contactInputFieldComponent';
+import InputFieldReusable from '../../../formReusableComponents/inputField_reusable';
+import FormSelectComponent from '../../../formReusableComponents/formSelectComponent';
+import FormButtonComponent from '../../../formReusableComponents/formButtonComponent';
+import SnackbarReusableComponent from '../../../formReusableComponents/snackbarResuableComponent';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import {userinfo,isModify} from '../../useReducer_reduxComponent/store/features/userinfo/userinfoSlice';
+import {userinfo,isModify} from '../../../useReducer_reduxComponent/store/features/userinfo/userinfoSlice';
 
 export default function UpdateForm(props) {
     var {userid,setIsViewProfile}=props;
@@ -75,7 +75,7 @@ export default function UpdateForm(props) {
                         name: ['country_callingcode', 'contact_number', 'country_dropdown'],
                         value: [editFormData?.country_callingcode, editFormData?.contact_number],
                         onchange: handleEditFormChange
-                    }} setEditFormData={setEditFormData} />
+                    }} setEditFormData={setEditFormData} setError={setError} />
                     <InputFieldReusable fieldInfo={{ title: 'Birthdate :', type: 'date', name: 'birthdate', value: editFormData?.birthdate, onchange: handleEditFormChange, isError:(editFormData.birthdate===''?true:false), errorMsg:'Birthdate is Required' }} />
                     <FormSelectComponent fieldInfo={{title:'Gender :',name:'gender',value:editFormData?.gender,onchange:handleEditFormChange,optValue:['female','male','other'],optText:['Female','Male','Other']}} />
                     <FormButtonComponent fieldInfo={{title:'Cancle',className:'formCancelBtn',type:'button',onclick:()=>{setIsViewProfile(true);dispatch(isModify(false))}}} />
