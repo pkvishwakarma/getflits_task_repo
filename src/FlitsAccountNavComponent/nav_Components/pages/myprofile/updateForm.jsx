@@ -8,12 +8,12 @@ import FormButtonComponent from '../../../formReusableComponents/formButtonCompo
 import SnackbarReusableComponent from '../../../formReusableComponents/snackbarResuableComponent';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import {userinfo,isModify} from '../../../useReducer_reduxComponent/store/features/userinfo/userinfoSlice';
+import { userinfo, isModify } from '../../../useReducer_reduxComponent/store/features/userinfo/userinfoSlice';
 
 export default function UpdateForm(props) {
-    var {userid,setIsViewProfile}=props;
-    var dispatch=useDispatch();
-    const user = useSelector((state)=>state.userdata);
+    var { userid, setIsViewProfile } = props;
+    var dispatch = useDispatch();
+    const user = useSelector((state) => state.userdata);
     const [editFormData, setEditFormData] = useState({
         first_name: '',
         last_name: '',
@@ -27,7 +27,7 @@ export default function UpdateForm(props) {
         open: false,
         Transition: Slide,
     });
-    const [error,setError]=useState(false);
+    const [error, setError] = useState(false);
 
     //Handling Edit form changes and collecting data to store in a state.
     function handleEditFormChange(e) {
@@ -36,10 +36,10 @@ export default function UpdateForm(props) {
         setEditFormData((pre) => {
             return (name === 'country_dropdown' ? { ...pre, country_callingcode: countryInfo?.callingcode } : { ...pre, [name]: e?.target.value });
         });
-        if(e.target.value===''){
+        if (e.target.value === '') {
             setError(true);
         }
-        else{
+        else {
             setError(false);
         }
     }
@@ -58,30 +58,33 @@ export default function UpdateForm(props) {
 
     useEffect(() => {
         //Filtering User Info from global state (UseReducer) than updating the EditFormData State to auto field the Update form..
-            var getUserById = Object.entries({user})[0].find((usr) => usr.id === parseInt(userid));
-            setEditFormData({ ...getUserById });
+        var getUserById = Object.entries({ user })[0].find((usr) => usr.id === parseInt(userid));
+        setEditFormData({ ...getUserById });
     }, [userid]);
 
     return (
         <>
             <div className='updateFormContainer'>
                 <form onSubmit={handleEditFormSubmit}>
-                    <InputFieldReusable fieldInfo={{ title: 'First Name :', type: 'text', name: 'first_name', value: editFormData?.first_name, onchange: handleEditFormChange, isError:(editFormData.first_name===''?true:false), errorMsg:'First Name Required' }} />
-                    <InputFieldReusable fieldInfo={{ title: 'Last Name :', type: 'text', name: 'last_name', value: editFormData?.last_name, onchange: handleEditFormChange, isError:(editFormData.last_name===''?true:false), errorMsg:'Last Name Required' }} />
-                    <InputFieldReusable fieldInfo={{ title: 'Email :', type: 'email', name: 'email', value: editFormData?.email, onchange: handleEditFormChange, isError:(editFormData.email===''?true:false), errorMsg:'Email is Required' }} />
+                    <InputFieldReusable fieldInfo={{ title: 'First Name :', type: 'text', name: 'first_name', value: editFormData?.first_name, onchange: handleEditFormChange, isError: (editFormData.first_name === '' ? true : false), errorMsg: 'First Name Required', className:'fNameUpdateField' }} />
+                    <InputFieldReusable fieldInfo={{ title: 'Last Name :', type: 'text', name: 'last_name', value: editFormData?.last_name, onchange: handleEditFormChange, isError: (editFormData.last_name === '' ? true : false), errorMsg: 'Last Name Required', className:'lNameUpdateField' }} />
+                    <InputFieldReusable fieldInfo={{ title: 'Email :', type: 'email', name: 'email', value: editFormData?.email, onchange: handleEditFormChange, isError: (editFormData.email === '' ? true : false), errorMsg: 'Email is Required', className:'emailUpdateField' }} />
                     <ContactInputFieldComponent contact_template={{
                         title: 'Contact Number :',
                         type: ['text', 'tel'],
                         name: ['country_callingcode', 'contact_number', 'country_dropdown'],
                         value: [editFormData?.country_callingcode, editFormData?.contact_number],
-                        onchange: handleEditFormChange
+                        onchange: handleEditFormChange,
+                        className:['contact_parent','country-selector','countryDropdown']
                     }} setEditFormData={setEditFormData} setError={setError} />
-                    <InputFieldReusable fieldInfo={{ title: 'Birthdate :', type: 'date', name: 'birthdate', value: editFormData?.birthdate, onchange: handleEditFormChange, isError:(editFormData.birthdate===''?true:false), errorMsg:'Birthdate is Required' }} />
-                    <FormSelectComponent fieldInfo={{title:'Gender :',name:'gender',value:editFormData?.gender,onchange:handleEditFormChange,optValue:['female','male','other'],optText:['Female','Male','Other']}} />
-                    <FormButtonComponent fieldInfo={{title:'Cancle',className:'formCancelBtn',type:'button',onclick:()=>{setIsViewProfile(true);dispatch(isModify(false))}}} />
-                    <FormButtonComponent fieldInfo={{title:'Save',className:'formSaveBtn',type:'Submit',disable:error}} />
+                    <InputFieldReusable fieldInfo={{ title: 'Birthdate :', type: 'date', name: 'birthdate', value: editFormData?.birthdate, onchange: handleEditFormChange, isError: (editFormData.birthdate === '' ? true : false), errorMsg: 'Birthdate is Required',className:'birthdateUpdateField' }} />
+                    <FormSelectComponent fieldInfo={{ title: 'Gender :', name: 'gender', value: editFormData?.gender, onchange: handleEditFormChange, optValue: ['female', 'male', 'other'], optText: ['Female', 'Male', 'Other'],className:'genderUpdateField' }} />
+                    <div className='updateFormBtnStyle'>
+                        <FormButtonComponent fieldInfo={{ title: 'Cancle', className: 'formCancelBtn', type: 'button', onclick: () => { setIsViewProfile(true); dispatch(isModify(false)) } }} />
+                        <FormButtonComponent fieldInfo={{ title: 'Save', className: 'formSaveBtn', type: 'Submit', disable: error }} />
+                    </div>
                 </form>
-                <SnackbarReusableComponent snackbarInfo={{style:'black',message:'Saving Profile Details..'}} snackbarState={snackbarState} />
+                <SnackbarReusableComponent snackbarInfo={{ style: 'black', message: 'Saving Profile Details..' }} snackbarState={snackbarState} />
             </div>
         </>
     )

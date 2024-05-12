@@ -1,0 +1,108 @@
+.addNewAddressBtn{
+    border: none;
+    color: black;
+    font-weight: 350;
+    background-color:unset;
+    font-size: 1em;
+}
+.addPlusIcon{
+    width: 4vw;
+}
+.addNewAddBtnParentContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 35%;
+    height:35vh;
+    border: 2px dashed gray;
+    border-radius: 5px;
+    background-color: unset;
+}
+
+.inputFieldNameContainer{
+    display: flex;
+    /* justify-content: space-between; */
+    /* width:100%; */
+    margin-top: 0.6em;
+}
+.fNameInputField,.lNameInputField{
+    width: 95%;
+    outline: unset;
+    border: 0.3px solid rgba(0, 0, 0, 0.582);
+    padding: 10px 8px;
+    border-radius: 5px;
+    margin-top: 0.4em;
+    margin-bottom: 0.8em;
+}
+
+.addressLine1InputField,.addressLine2InputField{
+    width: 97.5%;
+    outline: unset;
+    border: 0.3px solid rgba(0, 0, 0, 0.582);
+    padding: 10px 8px;
+    border-radius: 5px;
+    margin-top: 0.4em;
+    margin-bottom: 0.8em;
+}
+
+.inputFieldGroupContainer{
+    display: flex;
+    width: 97.5%;
+}
+
+.companyInputField,.postalInputField{
+    width:95%;
+    outline: unset;
+    border: 0.3px solid rgba(0, 0, 0, 0.582);
+    padding: 10px 8px;
+    border-radius: 5px;
+    margin-top: 0.4em;
+    margin-bottom: 0.8em;
+}
+
+.addFormContact_parent{
+    display: flex;
+    width:20vw;
+    border: 0.3px solid rgba(0, 0, 0, 0.582);
+    outline: unset;
+    border-radius: 5px;
+    margin-top: 0.4em;
+    margin-bottom: 0.8em;
+}
+
+.addFormContact_parent input[type='text']{
+    width: 35px;
+    font-size: 16px;
+    outline: unset;
+    border: none;
+    text-align: center;
+}
+
+.addFormContact_parent input[type="tel"] {
+    width: 60%;
+    font-size: 16px;
+    outline: unset;
+    border: none;
+}
+
+.addFormCountry-selector {
+    width: 55px;
+    font-size: 16px;
+    position: relative;
+}
+
+.addFormCountryDropdown{
+    width: 65px;
+    padding: 8px;
+    font-size: 16px;
+    outline: unset;
+    border: none;
+    border-left: 0.3px solid rgba(0, 0, 0, 0.582);
+}
+
+.addFormCountryDropdown~span {
+    position: absolute;
+    top: 5px;
+    left: 10px;
+}

@@ -8,7 +8,7 @@
     display: grid;
     grid-template-columns: 3fr 9fr;
     column-gap:1em;
-    margin: 5em 8em 0px 8em;
+    margin: 5em 4em 0px 8em;
 }
 
 .homepageHeading{
@@ -71,3 +71,4 @@
     background-color: rgb(121,103,162);
     margin-left:0.5em ;
 }
+

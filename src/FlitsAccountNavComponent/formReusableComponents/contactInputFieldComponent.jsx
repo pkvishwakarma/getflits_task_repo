@@ -6,7 +6,7 @@ export default function ContactInputFieldComponent({contact_template,setEditForm
     const [countryDetail, setCountryDetail] = useState({
         flag: ''
     });
-    var {title,type,name,value,onchange}=contact_template;
+    var {title,type,name,value,onchange,className,placeholder}=contact_template;
     var callingcodeInfo = FetchCountryInfoBasedOnCallingcode();
     //Using ternary Operator giving dynamic value to quantifire and storing a string as regExp.
     var telRegExp=(`^\\d{${13-value[0].length}}$`); 
@@ -37,7 +37,7 @@ export default function ContactInputFieldComponent({contact_template,setEditForm
 
     //Matching Contact length with RegExp and returning a error msg if Match found Null.
     function ContactMatch(){
-        var res=value[1].match(telRegExp);
+        var res=value[1]?.match(telRegExp);
         return !res && <span style={{color:'red'}}>Invalid Contact Number..</span> 
     }
 
@@ -53,24 +53,24 @@ export default function ContactInputFieldComponent({contact_template,setEditForm
         }
 
         //Handling modify form save button disabled based on Contact Matches regExp..
-        if(value[1].match(telRegExp)!==null){
-            setError(false)
-        }
-        else{
-            setError(true);
-        }
+        // if(value[1]?.match(telRegExp)!==null){
+        //     setError(false)
+        // }
+        // else{
+        //     setError(true);
+        // }
     },[callingcodeInfo,value[1]]);
 
     return (
         <>
             <div key={name[1]}>
                 <label htmlFor={name[1]}>{title}</label>
-                <div className="contact_parent">
+                <div className={className[0]}>
                     <input type={type[0]} name={name[0]} value={value[0]} onChange={onchange} readOnly />
-                    <input type={type[1]} name={name[1]} value={value[1]} onChange={onchange} />
+                    <input type={type[1]} name={name[1]} value={value[1]} onChange={onchange} placeholder={placeholder} />
 
-                    <div className="country-selector">
-                        <select id="countryDropdown" name={name[2]} value={callingcodeInfo} onChange={onchange}>
+                    <div className={className[1]}>
+                        <select className={className[2]} name={name[2]} value={callingcodeInfo} onChange={onchange}>
                             {
                                 countryData.map((country) =>
                                     <option key={country.name} value={JSON.stringify(country)}>{`${country.name}(${country.callingcode})`}</option>

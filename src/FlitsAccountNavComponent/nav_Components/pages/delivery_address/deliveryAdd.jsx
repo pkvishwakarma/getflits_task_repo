@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
+import ViewDeliveryAdd from './viewDeliveryAdd';
+import AddressForm from './addressForm';
 
 export default function DeliveryAdd(){
+    const [isViewDelivery,setIsViewDelivery]=useState(true);
     return(
         <>
-            <h3 style={{textAlign:'center'}}>Welcome to Delivery Page</h3>
+            <div>
+                {
+                    isViewDelivery?<ViewDeliveryAdd setIsViewDelivery={setIsViewDelivery} />
+                    :
+                    <AddressForm />
+                }
+            </div>
         </>
     )
 }

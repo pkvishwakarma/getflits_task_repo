@@ -6,7 +6,7 @@ export default function InputFieldReusable(props){
         <>
             <div key={inputProp.name} className='inputContainer'>
                     <label htmlFor={inputProp.name}>{inputProp.title}</label>
-                    <input type={inputProp.type} name={inputProp.name} value={inputProp.value} onChange={inputProp.onchange} />
+                    <input type={inputProp.type} name={inputProp.name} value={inputProp.value} onChange={inputProp.onchange} placeholder={inputProp.placeholder} className={inputProp.className} />
                     <div style={{color:'red'}}>{inputProp.isError && inputProp.errorMsg}</div>
             </div>
         </>
