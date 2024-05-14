@@ -13,10 +13,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 35%;
+    width: 32%;
     height:35vh;
     border: 2px dashed gray;
-    border-radius: 5px;
+    border-radius: 7px;
     background-color: unset;
 }
 
@@ -31,7 +31,7 @@
     outline: unset;
     border: 0.3px solid rgba(0, 0, 0, 0.582);
     padding: 10px 8px;
-    border-radius: 5px;
+    border-radius: 7px;
     margin-top: 0.4em;
     margin-bottom: 0.8em;
 }
@@ -41,22 +41,23 @@
     outline: unset;
     border: 0.3px solid rgba(0, 0, 0, 0.582);
     padding: 10px 8px;
-    border-radius: 5px;
+    border-radius: 7px;
     margin-top: 0.4em;
     margin-bottom: 0.8em;
 }
 
 .inputFieldGroupContainer{
-    display: flex;
+    display: grid;
+    grid-template-columns: 4fr 4fr 4fr;
     width: 97.5%;
 }
 
 .companyInputField,.postalInputField{
-    width:95%;
+    width:90%;
     outline: unset;
     border: 0.3px solid rgba(0, 0, 0, 0.582);
     padding: 10px 8px;
-    border-radius: 5px;
+    border-radius: 7px;
     margin-top: 0.4em;
     margin-bottom: 0.8em;
 }
@@ -66,7 +67,7 @@
     width:20vw;
     border: 0.3px solid rgba(0, 0, 0, 0.582);
     outline: unset;
-    border-radius: 5px;
+    border-radius: 7px;
     margin-top: 0.4em;
     margin-bottom: 0.8em;
 }
@@ -105,4 +106,64 @@
     position: absolute;
     top: 5px;
     left: 10px;
+}
+
+.cityInputField,.countryDropdownField{
+    width:92%;
+    outline: unset;
+    border: 0.3px solid rgba(0, 0, 0, 0.582);
+    padding: 10px 8px;
+    border-radius: 7px;
+    margin-top: 0.4em;
+    margin-bottom: 0.8em;
+}
+
+.stateDropdownField{
+    width:100%;
+    outline: unset;
+    border: 0.3px solid rgba(0, 0, 0, 0.582);
+    padding: 10px 8px;
+    border-radius: 7px;
+    margin-top: 0.4em;
+    margin-bottom: 0.8em;
+}
+
+.formSaveBtn {
+    background-color: rgb(32, 2, 100);
+    border-radius: 5px;
+    padding: 10px 20px;
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(32, 2, 100);
+    font-weight: 700;
+    margin-top: 1.2em;
+    cursor: pointer;
+}
+
+.formSaveBtn:hover {
+    background-color: rgb(102, 106, 152);
+    border: 1px solid rgb(102, 106, 152);
+}
+
+.formCancelBtn {
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    padding: 10px 20px;
+    color: rgb(32, 2, 100);
+    border: 1px solid rgb(32, 2, 100);
+    font-weight: 700;
+    margin-top: 1.2em;
+    cursor: pointer;
+    margin-right: 0.8em;
+}
+
+.formCancelBtn:hover {
+    background-color: rgb(32, 2, 100);
+    border: 1px solid rgb(32, 2, 100);
+    color: rgb(255, 255, 255);
+}
+
+.updateFormBtnStyle {
+    display: flex;
+    justify-content: end;
+    margin-top: 2em;
 }

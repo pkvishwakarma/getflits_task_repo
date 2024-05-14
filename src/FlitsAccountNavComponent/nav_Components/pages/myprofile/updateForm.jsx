@@ -76,7 +76,7 @@ export default function UpdateForm(props) {
                         value: [editFormData?.country_callingcode, editFormData?.contact_number],
                         onchange: handleEditFormChange,
                         className:['contact_parent','country-selector','countryDropdown']
-                    }} setEditFormData={setEditFormData} setError={setError} />
+                    }} setError={setError} />
                     <InputFieldReusable fieldInfo={{ title: 'Birthdate :', type: 'date', name: 'birthdate', value: editFormData?.birthdate, onchange: handleEditFormChange, isError: (editFormData.birthdate === '' ? true : false), errorMsg: 'Birthdate is Required',className:'birthdateUpdateField' }} />
                     <FormSelectComponent fieldInfo={{ title: 'Gender :', name: 'gender', value: editFormData?.gender, onchange: handleEditFormChange, optValue: ['female', 'male', 'other'], optText: ['Female', 'Male', 'Other'],className:'genderUpdateField' }} />
                     <div className='updateFormBtnStyle'>

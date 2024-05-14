@@ -1,23 +1,27 @@
-import React,{useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import '../nav_Components/pages/myprofile/updateForm.css';
 
-export default function ContactInputFieldComponent({contact_template,setEditFormData,setError}) {
+export default function ContactInputFieldComponent({ contact_template, setError }) {
     const [countryData, setCountryData] = useState([]);
     const [countryDetail, setCountryDetail] = useState({
         flag: ''
     });
-    var {title,type,name,value,onchange,className,placeholder}=contact_template;
+    var { title, type, name, value, onchange, className, placeholder } = contact_template;
     var callingcodeInfo = FetchCountryInfoBasedOnCallingcode();
     //Using ternary Operator giving dynamic value to quantifire and storing a string as regExp.
-    var telRegExp=(`^\\d{${13-value[0].length}}$`); 
+    var telRegExp = (`^\\d{${13 - value[0].length}}$`);
     //Now Converting string to form of RegExp using new RegExp Method.
-    telRegExp=new RegExp(telRegExp);
+    telRegExp = new RegExp(telRegExp);
 
     // Fetching Country info like (flag,callingcode and Country name)..
-    function LoadCountryData() {
-        fetch('https://countryinfoapi.com/api/countries/')
-            .then((res) => res.json())
-            .then((res) => setCountryData([...res]));
+    async function LoadCountryData() {
+        try {
+           await fetch('https://countryinfoapi.com/api/countries/')
+                .then((res) => res.json())
+                .then((res) => setCountryData([...res]));
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     //Fetching Country Info based on Callingcode to fill contact Field dynamically
@@ -28,20 +32,23 @@ export default function ContactInputFieldComponent({contact_template,setEditForm
 
     //using this function updating countryDetail state with callingcode received from user..
     function LoadCallingcodeCountryDetail() {
-        var callingInfo = JSON?.parse(callingcodeInfo);
+        try {
+            var callingInfo = JSON?.parse(callingcodeInfo);
         setCountryDetail({
             flag: callingInfo?.flag
         })
-        setEditFormData((pre) => { return { ...pre, country_callingcode: callingInfo?.callingcode } });
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     //Matching Contact length with RegExp and returning a error msg if Match found Null.
-    function ContactMatch(){
-        var res=value[1]?.match(telRegExp);
-        return !res && <span style={{color:'red'}}>Invalid Contact Number..</span> 
+    function ContactMatch() {
+        var res = value[1]?.match(telRegExp);
+        return !res && <span style={{ color: 'red' }}>Invalid Contact Number..</span>
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         LoadCountryData();
         ContactMatch();
         //Handiling callingcodeInfo Variable Undefined error..
@@ -49,17 +56,17 @@ export default function ContactInputFieldComponent({contact_template,setEditForm
             LoadCallingcodeCountryDetail();
         }
         else {
-            FetchCountryInfoBasedOnCallingcode(); 
+            FetchCountryInfoBasedOnCallingcode();
         }
 
         //Handling modify form save button disabled based on Contact Matches regExp..
-        // if(value[1]?.match(telRegExp)!==null){
-        //     setError(false)
-        // }
-        // else{
-        //     setError(true);
-        // }
-    },[callingcodeInfo,value[1]]);
+        if (value[1]?.match(telRegExp) !== null) {
+            setError(false)
+        }
+        else {
+            setError(true);
+        }
+    }, [callingcodeInfo, value[1]]);
 
     return (
         <>

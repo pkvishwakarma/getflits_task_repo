@@ -10,7 +10,7 @@ export default function DeliveryAdd(){
                 {
                     isViewDelivery?<ViewDeliveryAdd setIsViewDelivery={setIsViewDelivery} />
                     :
-                    <AddressForm />
+                    <AddressForm setIsViewDelivery={setIsViewDelivery} />
                 }
             </div>
         </>
