@@ -26,7 +26,7 @@ export default function FormSelectComponent(props) {
                     {
                         selectProp.name==='country'?
                         countries.map(country => (
-                            <option key={country.name.common} value={country.cca2}>{country.name.common}</option>
+                            <option key={country.cca2} value={country.name.common}>{country.name.common}</option>
                           ))
                         :
                         selectProp.optText.map((text, ind) =>

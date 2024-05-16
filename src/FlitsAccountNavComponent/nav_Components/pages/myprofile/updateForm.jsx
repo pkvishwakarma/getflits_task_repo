@@ -8,12 +8,12 @@ import FormButtonComponent from '../../../formReusableComponents/formButtonCompo
 import SnackbarReusableComponent from '../../../formReusableComponents/snackbarResuableComponent';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { userinfo, isModify } from '../../../useReducer_reduxComponent/store/features/userinfo/userinfoSlice';
+import {userinfo,isModify} from '../../../useReducer_reduxComponent/store/store';
 
 export default function UpdateForm(props) {
     var { userid, setIsViewProfile } = props;
     var dispatch = useDispatch();
-    const user = useSelector((state) => state.userdata);
+    const user = useSelector((state) => state.initialUserData.userdata);
     const [editFormData, setEditFormData] = useState({
         first_name: '',
         last_name: '',

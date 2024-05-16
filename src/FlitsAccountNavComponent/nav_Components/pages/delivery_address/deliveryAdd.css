@@ -13,11 +13,99 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 32%;
+    width: 30%;
     height:35vh;
     border: 2px dashed gray;
     border-radius: 7px;
     background-color: unset;
+    cursor: pointer;
+}
+
+.deliveryAddressListContainer{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    border-top: 2px solid rgba(128, 128, 128, 0.300);
+    padding-top: 1em;
+    margin-top: 1em;
+}
+
+.deliveryAddressList{
+    flex-wrap: wrap;
+    width: 30%;
+    height:35vh;
+    border: 2px solid gray;
+    border-radius: 7px;
+    padding: 1.2em;
+    margin-right: 1em;
+    margin-top: 1em;
+    position: relative;
+}
+
+.editIconContainer{
+    position: absolute;
+    right:25px;
+    top:30px;
+    display: none;
+}
+
+.deliveryAddressList:hover .editIconContainer,.deliveryAddressList:hover .trashIconContainer{
+    display:block;
+}
+
+.editIcon2{
+    display: none;
+    position: absolute;
+    right: 1px;
+}
+
+.editIconContainer:hover .editIcon2{
+    display: block;
+    cursor: pointer;
+}
+
+.editIconContainer:hover .editIcon1{
+    display: none;
+}
+
+.trashIconContainer{
+    position: absolute;
+    right:25px;
+    top:30px;
+    display: none;
+}
+
+.trashIconContainer:hover .trashIcon2{
+    display: block;
+    cursor: pointer;
+}
+
+.trashIconContainer:hover .trashIcon1{
+    display: none;
+}
+
+.trashIcon1{
+    display: block;
+    position: absolute;
+    right: 1px;
+    top:40px;
+}
+
+.trashIcon2{
+    display: none;
+    position: absolute;
+    right: 1px;
+    top:40px;
+}
+
+.deliveryAddressList .deliveryClientName{
+    font-weight: bold;
+}
+
+.paginationContainer{
+    display: flex;
+    justify-content: center;
+    margin: 1em 0px;
 }
 
 .inputFieldNameContainer{
@@ -162,7 +250,7 @@
     color: rgb(255, 255, 255);
 }
 
-.updateFormBtnStyle {
+.delivertAddFormBtnStyle {
     display: flex;
     justify-content: end;
     margin-top: 2em;

@@ -7,8 +7,8 @@ import { useSelector } from 'react-redux';
 
 export default function ViewProfile(props) {
     var {setUserid,setIsViewProfile}=props;
-    const user = useSelector((state)=>state?.userdata);
-    var isModify=useSelector((state)=>state?.isModified);
+    const user = useSelector((state)=>state?.initialUserData.userdata);
+    var isModify=useSelector((state)=>state?.initialUserData.isModified);
     const formDetail={
         first_name:'First Name',
         last_name:'Last Name',

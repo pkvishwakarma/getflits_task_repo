@@ -104,4 +104,5 @@
 
 .updateFormBtnStyle {
     display: flex;
+    justify-content: start;
 }
