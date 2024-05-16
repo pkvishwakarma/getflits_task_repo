@@ -52,14 +52,14 @@ export default function ViewDeliveryAdd(props) {
                                 <p>{address?.postal_code} {address?.city}</p>
                                 <p>{address?.country}</p>
                                 <p>{address?.country_callingcode}{address?.contact_number}</p>
-                                {/* <div className="editIconContainer">
+                                <div className="editIconContainer">
                                     <img src={'./images/icons/Pencil-Edit.png'} alt="editIcon" width={25} className="editIcon1" />
                                     <img src={'./images/icons/Pencil-Edit_black.png'} alt="editIconBlack" width={23} className="editIcon2" title="Edit" />
                                 </div>
                                 <div className="trashIconContainer">
                                     <img src={'./images/icons/Delete-Bin.svg'} alt="trashIcon" width={25} className="trashIcon1" />
                                     <img src={'./images/icons/Delete-Bin_black.png'} alt="trashIconBlack" width={23} className="trashIcon2" title="Delete" />
-                                </div> */}
+                                </div>
                             </div>
                         )
                     }
