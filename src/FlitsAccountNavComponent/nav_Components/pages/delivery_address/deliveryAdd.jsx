@@ -4,14 +4,14 @@ import AddressForm from './addressForm';
 
 export default function DeliveryAdd(){
     const [isViewDelivery,setIsViewDelivery]=useState(true);
-    const [isAddNewAddress,setIsAddNewAddress]=useState(true);
+    const [isAddNewAddress,setIsAddNewAddress]=useState('');
     const [editDeliveryAddressId,setEditDeliveryAddressId]=useState(0);
     return(
         <>
             <div>
                 {
                     isViewDelivery?
-                    <ViewDeliveryAdd setIsViewDelivery={setIsViewDelivery} setIsAddNewAddress={setIsAddNewAddress} setEditDeliveryAddressId={setEditDeliveryAddressId} />
+                    <ViewDeliveryAdd setIsViewDelivery={setIsViewDelivery} setIsAddNewAddress={setIsAddNewAddress} setEditDeliveryAddressId={setEditDeliveryAddressId} isAddNewAddress={isAddNewAddress} />
                     : isAddNewAddress?
                     <AddressForm title='Add New Address' setIsViewDelivery={setIsViewDelivery} isAddNewAddress={isAddNewAddress} />
                     :

@@ -116,7 +116,7 @@ export default function AddressForm(props) {
             }
             else {
                 localStorage.setItem('deliveryAdd', JSON.stringify(deliverList));
-                dispatch(updateDeliveryAdd(props.editDeliveryAddressId));
+                dispatch(updateDeliveryAdd(addressFormData));
                 // console.log('Update address Effect');
             }
         }

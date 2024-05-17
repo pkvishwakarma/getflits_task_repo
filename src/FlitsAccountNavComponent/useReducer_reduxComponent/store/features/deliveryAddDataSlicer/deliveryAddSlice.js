@@ -29,7 +29,15 @@ export const deliveryAddSlice=createSlice({
         },
 
         updateDeliveryAdd:(state,action)=>{
-            console.log(action.payload);
+            // console.log(action.payload);
+            var editedIndex=state.deliveryAddCollection[0].findIndex((index)=>index.id===action.payload.id);
+            if(editedIndex!==-1){
+                state.deliveryAddCollection[0][editedIndex]={...action.payload};
+            }
+        },
+
+        deleteDeliveryAdd:(state,action)=>{
+            state.deliveryAddCollection[0]=state.deliveryAddCollection[0].filter((add)=>add.id!==action.payload);
         },
 
         isAddressAdded:(state,action)=>{
@@ -38,5 +46,5 @@ export const deliveryAddSlice=createSlice({
     }
 });
 
-export const {addDeliveryAdd,isAddressAdded,updateDeliveryAdd}=deliveryAddSlice.actions;
+export const {addDeliveryAdd,isAddressAdded,updateDeliveryAdd,deleteDeliveryAdd}=deliveryAddSlice.actions;
 export default deliveryAddSlice.reducer;

@@ -71,4 +71,17 @@
     background-color: rgb(121,103,162);
     margin-left:0.5em ;
 }
+.active li .deliveryLength, .deliveryLength:hover{
+    background-color: rgb(32, 2, 100);
+    padding: 0.1em 0.5em;
+    border-radius: 100%;
+    font-weight: 500;
+}
+
+.deliveryLength{
+    background-color: rgb(121,103,162);
+    padding: 0.1em 0.5em;
+    border-radius: 100%;
+    font-weight: 500;
+}
 
