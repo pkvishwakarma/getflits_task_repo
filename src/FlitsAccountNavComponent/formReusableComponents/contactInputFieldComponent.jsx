@@ -63,6 +63,9 @@ export default function ContactInputFieldComponent({ contact_template, setError 
         if (value[1]?.match(telRegExp) !== null) {
             setError(false)
         }
+        else if(value[1]===''){
+            setError(false);
+        }
         else {
             setError(true);
         }
@@ -87,7 +90,7 @@ export default function ContactInputFieldComponent({ contact_template, setError 
                         <span id="flag"><img src={countryDetail?.flag} alt="cf" width={35} /></span>
                     </div>
                 </div>
-                {ContactMatch()}
+                {value[1]===''?'':ContactMatch()}
             </div>
         </>
     )

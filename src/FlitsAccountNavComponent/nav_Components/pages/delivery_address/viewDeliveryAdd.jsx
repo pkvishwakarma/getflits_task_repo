@@ -7,7 +7,7 @@ import Slide from '@mui/material/Slide';
 import SnackbarReusableComponent from '../../../formReusableComponents/snackbarResuableComponent';
 
 export default function ViewDeliveryAdd(props) {
-    var { setIsViewDelivery } = props;
+    var { setIsViewDelivery,setIsAddNewAddress,setEditDeliveryAddressId } = props;
     var deliveryAddData = (useSelector((state) => state.deliveryData.deliveryAddCollection));
     var isDeliveryAddAdded = (useSelector((state) => state.deliveryData.isAddress));
     const [snackbarState, setSnackbarState] = useState({
@@ -18,9 +18,9 @@ export default function ViewDeliveryAdd(props) {
     //Pagination State starts..
     const [page, setPage] = useState(1);
     const addressesPerPage = 6;
-    const indexOfLastAddress = page * addressesPerPage;
-    const indexOfFirstAddress = indexOfLastAddress - addressesPerPage;
-    const currentAddresses = deliveryAddData.slice(indexOfFirstAddress, indexOfLastAddress);
+    var indexOfLastAddress = page * addressesPerPage;
+    var indexOfFirstAddress = indexOfLastAddress - addressesPerPage;
+    var currentAddresses =deliveryAddData[0]?.slice(indexOfFirstAddress, indexOfLastAddress);
 
     //Handling Pagination Change..
     const handleChangePage = (event, newPage) => {
@@ -29,8 +29,16 @@ export default function ViewDeliveryAdd(props) {
     //Pagination Funtionality ends..
 
     useEffect(() => {
-        isDeliveryAddAdded && setSnackbarState((pre) => { return { ...pre, open: true } });
-    }, [isDeliveryAddAdded])
+        // console.log(deliveryAddData[0]);
+        try {
+            if(!deliveryAddData){
+                currentAddresses=deliveryAddData[0]?.slice(indexOfFirstAddress, indexOfLastAddress)
+            }
+            isDeliveryAddAdded && setSnackbarState((pre) => { return { ...pre, open: true } }); 
+        } catch (error) {
+            console.log(error)
+        }
+    }, [isDeliveryAddAdded]);
 
     return (
         <>
@@ -38,13 +46,14 @@ export default function ViewDeliveryAdd(props) {
                 <div>
                     <FormButtonComponent fieldInfo={{
                         title: <><img src="./images/icons/plus-circle.svg" alt="plus-icon" className="addPlusIcon" />
-                            <p className='addNewAddressBtn'>Add New Address</p></>, className: 'addNewAddBtnParentContainer', type: 'button', onclick: () => { setIsViewDelivery(false) }
+                            <p className='addNewAddressBtn'>Add New Address</p></>, className: 'addNewAddBtnParentContainer', type: 'button', onclick: () => { setIsViewDelivery(false);setIsAddNewAddress(true) }
                     }} />
                 </div>
                 <div className="deliveryAddressListContainer">
                     {
-                        currentAddresses.map((address) =>
-                            <div key={address.first_name + address.contact_number} className="deliveryAddressList">
+                        currentAddresses !== null &&
+                        currentAddresses?.map((address) =>
+                            <div key={address?.id} className="deliveryAddressList">
                                 <p className="deliveryClientName">{`${address?.first_name} ${address?.last_name}`}</p>
                                 <p>{address?.company}</p>
                                 <p>{address?.add_line1}</p>
@@ -52,7 +61,7 @@ export default function ViewDeliveryAdd(props) {
                                 <p>{address?.postal_code} {address?.city}</p>
                                 <p>{address?.country}</p>
                                 <p>{address?.country_callingcode}{address?.contact_number}</p>
-                                <div className="editIconContainer">
+                                <div className="editIconContainer" onClick={()=>{setIsViewDelivery(false); setIsAddNewAddress(false); setEditDeliveryAddressId(address.id)}}>
                                     <img src={'./images/icons/Pencil-Edit.png'} alt="editIcon" width={25} className="editIcon1" />
                                     <img src={'./images/icons/Pencil-Edit_black.png'} alt="editIconBlack" width={23} className="editIcon2" title="Edit" />
                                 </div>
@@ -67,10 +76,10 @@ export default function ViewDeliveryAdd(props) {
                 <div className="paginationContainer">
                     <div>
                         {
-                            deliveryAddData.length > 6 &&
+                            deliveryAddData[0]?.length > 6 &&
                             <Container>
                                 <Pagination
-                                    count={Math.ceil(deliveryAddData.length / addressesPerPage)}
+                                    count={Math.ceil(deliveryAddData[0]?.length / addressesPerPage)}
                                     page={page}
                                     onChange={handleChangePage}
                                 />
