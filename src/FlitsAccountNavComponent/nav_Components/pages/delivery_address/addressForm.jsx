@@ -152,6 +152,10 @@ export default function AddressForm(props) {
                         <FormSelectComponent fieldInfo={{ title: 'Country :', name: 'country', value: addressFormData.country, className: 'countryDropdownField', onchange: handleFormAddressChange }} />
                         {showProvince && <FormSelectComponent fieldInfo={{ title: 'Province :', name: 'province', value: addressFormData.province, optValue: ['new delhi', 'mumbai', 'pune', 'goa', 'madhya pradesh', 'uttar pradesh', 'bihar', 'jharkhand', 'chattisgarh', 'gujrat'], optText: ['New Delhi', 'Mumbai', 'Pune', 'Goa', 'Madhya Pradesh', 'Uttar Pradesh', 'Bihar', 'Jharkhand', 'Chattisgarh', 'Gujrat'], className: 'stateDropdownField', onchange: handleFormAddressChange }} />}
                     </div>
+                    <div className="addressDefaultCheckboxField">
+                        <input type="checkbox" name="default_address" className="addressDefaultCheckboxField" />
+                        <label htmlFor="default_address">Mark As Default Address</label>
+                    </div>
                     <div className='delivertAddFormBtnStyle'>
                         <FormButtonComponent fieldInfo={{ title: 'Cancle', className: 'formCancelBtn', type: 'button', onclick: () => { props.setIsViewDelivery(true); dispatch(isAddressAdded(false)) } }} />
                         <FormButtonComponent fieldInfo={{ title: 'Save', className: 'formSaveBtn', type: 'Submit', disable: error }} />

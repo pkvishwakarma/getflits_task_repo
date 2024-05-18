@@ -10,8 +10,7 @@ export const userSlice=createSlice({
     initialState,
     reducers:{
         userinfo:(state,action)=>{
-            const {id,first_name,last_name,email,contact_number,country_callingcode,birthdate,gender}=action.payload;
-            state.userdata={id,first_name,last_name,email,contact_number,country_callingcode,birthdate,gender}
+            state.userdata={...action.payload};
         },
         isModify:(state,action)=>{
             state.isModified=action.payload;

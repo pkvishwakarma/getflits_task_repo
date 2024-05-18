@@ -12,10 +12,16 @@ import HowToManageCredit from './nav_Components/pages/howToManageCredit';
 import ChangePassword from './nav_Components/pages/changePassword';
 // import UpdateForm from './nav_Components/pages/updateForm';
 import userData from '../constentData/loginUserData.json';
+import { useDispatch } from 'react-redux';
+import { userinfo } from './useReducer_reduxComponent/store/store';
 
 export default function FlitsHomePage() {
+    var dispatch=useDispatch();
+
+    //Handling Initial UserData mount on Page Load..
     useEffect(()=>{
         localStorage.setItem('userdata',JSON.stringify(userData?.users[0]));
+        dispatch(userinfo(JSON.parse(localStorage?.getItem('userdata'))));
     },[])
     return (
         <>

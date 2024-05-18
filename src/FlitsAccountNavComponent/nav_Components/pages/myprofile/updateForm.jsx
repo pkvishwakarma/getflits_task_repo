@@ -6,8 +6,7 @@ import InputFieldReusable from '../../../formReusableComponents/inputField_reusa
 import FormSelectComponent from '../../../formReusableComponents/formSelectComponent';
 import FormButtonComponent from '../../../formReusableComponents/formButtonComponent';
 import SnackbarReusableComponent from '../../../formReusableComponents/snackbarResuableComponent';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 import {userinfo,isModify} from '../../../useReducer_reduxComponent/store/store';
 
 export default function UpdateForm(props) {
