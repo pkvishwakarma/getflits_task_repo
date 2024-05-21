@@ -25,7 +25,7 @@ export default function Navbar() {
                         {
                             navListObj.map((list)=>
                             Object.keys(list).map((navlist)=>
-                                <NavLink key={list[navlist].link} to={`/${list[navlist].link}`} className='linkStyle'>{list[navlist].link==='delivery'?<li>{list[navlist].text} <span className='deliveryLength'>{deliveryAddData[0].length}</span></li>:<li>{list[navlist].text}</li>}</NavLink>
+                                <NavLink key={list[navlist].link} to={`/${list[navlist].link}`} className='linkStyle'>{list[navlist].link==='delivery'?<li>{list[navlist].text} <span className='deliveryLength'>{deliveryAddData[0]?.length}</span></li>:<li>{list[navlist].text}</li>}</NavLink>
                              ))
                         }
                         <li>Log Out</li>
