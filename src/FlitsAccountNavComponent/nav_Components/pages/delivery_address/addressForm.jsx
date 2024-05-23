@@ -95,7 +95,7 @@ export default function AddressForm(props) {
                     localStorage.setItem('defaultAdd', JSON.stringify(addressFormData));
                     dispatch(isDefaultAdd(JSON.parse(localStorage.getItem('defaultAdd'))));
                     copyDeliveryList[editedDataIndex] = ([])
-                    setDeliveryList([...copyDeliveryList]);
+                    setDeliveryList([]);
                     setSnackbarState((pre) => { return { ...pre, open: true } });
                     setTimeout(() => {
                         props.setIsViewDelivery(true);
