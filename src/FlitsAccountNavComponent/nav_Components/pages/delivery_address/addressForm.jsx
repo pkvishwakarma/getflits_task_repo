@@ -81,9 +81,9 @@ export default function AddressForm(props) {
             if (addressFormData.isdefault_add) {
                 if (Object.keys(defaultAddress).length !== 0) {
                     copyDeliveryList[editedDataIndex] = { ...defaultAddress, isdefault_add: false };
-                    setDeliveryList([...copyDeliveryList]);
                     localStorage.setItem('defaultAdd', JSON.stringify(addressFormData));
                     dispatch(isDefaultAdd(JSON.parse(localStorage.getItem('defaultAdd'))));
+                    setDeliveryList([...copyDeliveryList]);
                     setSnackbarState((pre) => { return { ...pre, open: true } });
                     setTimeout(() => {
                         props.setIsViewDelivery(true);
@@ -95,9 +95,7 @@ export default function AddressForm(props) {
                     localStorage.setItem('defaultAdd', JSON.stringify(addressFormData));
                     dispatch(isDefaultAdd(JSON.parse(localStorage.getItem('defaultAdd'))));
                     copyDeliveryList[editedDataIndex] = ([])
-                    setDeliveryList([]);
-                    localStorage.setItem('deliveryAdd', JSON.stringify(deliverList));
-                    dispatch(updateDeliveryAdd(deliverList));
+                    setDeliveryList([...copyDeliveryList]);
                     setSnackbarState((pre) => { return { ...pre, open: true } });
                     setTimeout(() => {
                         props.setIsViewDelivery(true);
@@ -109,6 +107,8 @@ export default function AddressForm(props) {
             else {
                 copyDeliveryList[editedDataIndex] = { ...addressFormData };
                 setDeliveryList([...copyDeliveryList]);
+                localStorage.setItem('deliveryAdd', JSON.stringify(copyDeliveryList));
+                dispatch(updateDeliveryAdd(copyDeliveryList[editedDataIndex]));
                 setSnackbarState((pre) => { return { ...pre, open: true } });
                 setTimeout(() => {
                     props.setIsViewDelivery(true);
@@ -156,7 +156,7 @@ export default function AddressForm(props) {
 
     //Function To fetch delivery address data based on id on edit click..
     async function fetchEditDeliveryAddressData() {
-        var editedData = await deliverList.find((data) => data.id === props.editDeliveryAddressId) || ((defaultAddress.id === props.editDeliveryAddressId) && { ...defaultAddress });
+        var editedData = await deliverList.find((data) => data.id === props.editDeliveryAddressId) || ((defaultAddress.id === props.editDeliveryAddressId) && defaultAddress);
         if (editedData) {
             setAddressFormData({ ...editedData });
         }
@@ -166,7 +166,7 @@ export default function AddressForm(props) {
         !props.isAddNewAddress && fetchEditDeliveryAddressData();
         // console.log(props.isAddNewAddress);
         if (deliverList) {
-            if (props.isAddNewAddress) {
+            if (props.isAddNewAddress || addressFormData.isdefault_add) {
                 localStorage.setItem('deliveryAdd', JSON.stringify(deliverList));
                 dispatch(addDeliveryAdd(JSON.parse(localStorage.getItem('deliveryAdd'))));
                 // console.log('Add new address Effect');

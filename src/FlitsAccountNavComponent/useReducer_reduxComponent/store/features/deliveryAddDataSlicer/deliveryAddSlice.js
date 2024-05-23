@@ -29,9 +29,10 @@ export const deliveryAddSlice=createSlice({
             // state.deliveryAddCollection.push(deliveryAddress);
             state.deliveryAddCollection=[action.payload]
         },
-
+        
         updateDeliveryAdd:(state,action)=>{
-            // console.log(action.payload);
+            // console.log(action.payload.id);
+            // console.log(state.deliveryAddCollection);
             var editedIndex=state.deliveryAddCollection[0]?.findIndex((index)=>index.id===action.payload.id);
             if(editedIndex!==-1){
                 state.deliveryAddCollection[0][editedIndex]={...action.payload};
