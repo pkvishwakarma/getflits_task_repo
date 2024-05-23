@@ -6,10 +6,10 @@ export default function ContactInputFieldComponent({ contact_template, setError 
     const [countryDetail, setCountryDetail] = useState({
         flag: ''
     });
-    var { title, type, name, value, onchange, className, placeholder } = contact_template;
+    var { title, type, name, value, onchange, className, placeholder } = contact_template; //value have array of value where value[0] containe Country_callingcode and value[1] containe contact_number field value
     var callingcodeInfo = FetchCountryInfoBasedOnCallingcode();
     //Using ternary Operator giving dynamic value to quantifire and storing a string as regExp.
-    var telRegExp = (`^\\d{${13 - value[0].length}}$`);
+    var telRegExp = (`^\\d{${13 - value[0]?.length}}$`);
     //Now Converting string to form of RegExp using new RegExp Method.
     telRegExp = new RegExp(telRegExp);
 

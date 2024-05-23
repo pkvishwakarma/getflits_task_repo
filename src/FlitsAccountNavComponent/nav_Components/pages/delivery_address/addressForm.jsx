@@ -3,8 +3,8 @@ import InputFieldReusable from '../../../formReusableComponents/inputField_reusa
 import ContactInputFieldComponent from "../../../formReusableComponents/contactInputFieldComponent";
 import FormSelectComponent from "../../../formReusableComponents/formSelectComponent";
 import FormButtonComponent from '../../../formReusableComponents/formButtonComponent';
-import { useDispatch } from "react-redux";
-import { addDeliveryAdd, isAddressAdded, updateDeliveryAdd } from '../../../useReducer_reduxComponent/store/store';
+import { useDispatch, useSelector } from "react-redux";
+import { addDeliveryAdd, isAddressAdded, updateDeliveryAdd, isDefaultAdd } from '../../../useReducer_reduxComponent/store/store';
 import Slide from '@mui/material/Slide';
 import SnackbarReusableComponent from "../../../formReusableComponents/snackbarResuableComponent";
 
@@ -35,9 +35,11 @@ export default function AddressForm(props) {
         country_callingcode: '+91',
         city: '',
         country: '',
-        province: ''
+        province: '',
+        isdefault_add: false
     });
     const [deliverList, setDeliveryList] = useState(FetchDeliveryDataFromLocalStorage());
+    var defaultAddress = useSelector((state) => state.deliveryData.defaultAddress);
     var dispatch = useDispatch();
     const [snackbarState, setSnackbarState] = useState({
         open: false,
@@ -52,7 +54,7 @@ export default function AddressForm(props) {
         try {
             var countryInfo = name === 'country_dropdown' && JSON.parse(value);
             setAddressFormData((pre) => {
-                return (name === 'country_dropdown' ? { ...pre, country_callingcode: countryInfo?.callingcode } : { ...pre, [name]: value });
+                return (name === 'country_dropdown' ? { ...pre, country_callingcode: countryInfo?.callingcode } : name === 'default_address' ? { ...pre, isdefault_add: e.target.checked } : { ...pre, [name]: value });
             });
 
             if (name === 'country' && value) {
@@ -73,33 +75,88 @@ export default function AddressForm(props) {
     //Function delivery Address Form Submit Starts..
     function handleFormAddressSubmit(e) {
         e.preventDefault();
-        var editedDataIndex = deliverList.findIndex((data) => data.id === props.editDeliveryAddressId);
-        if (editedDataIndex !== -1) {
-            var copyDeliveryList = [...deliverList];
-            copyDeliveryList[editedDataIndex] = { ...addressFormData };
-            setDeliveryList([...copyDeliveryList]);
-            setSnackbarState((pre) => { return { ...pre, open: true } });
-            setTimeout(() => {
-                props.setIsViewDelivery(true);
-            }, 1500);
-            dispatch(isAddressAdded(true));
-            // console.log('Update address mode');
+        var editedDataIndex = deliverList?.findIndex((data) => data.id === props.editDeliveryAddressId);
+        var copyDeliveryList = [...deliverList];
+        if (editedDataIndex !== -1 || ((defaultAddress?.id === props?.editDeliveryAddressId) && (defaultAddress?.id) !== undefined && (props.editDeliveryAddressId) !== undefined)) {
+            if (addressFormData.isdefault_add) {
+                if (Object.keys(defaultAddress).length !== 0) {
+                    copyDeliveryList[editedDataIndex] = { ...defaultAddress, isdefault_add: false };
+                    setDeliveryList([...copyDeliveryList]);
+                    localStorage.setItem('defaultAdd', JSON.stringify(addressFormData));
+                    dispatch(isDefaultAdd(JSON.parse(localStorage.getItem('defaultAdd'))));
+                    setSnackbarState((pre) => { return { ...pre, open: true } });
+                    setTimeout(() => {
+                        props.setIsViewDelivery(true);
+                    }, 1500);
+                    dispatch(isAddressAdded(true));
+                    // console.log('Update address mode');
+                }
+                else {
+                    localStorage.setItem('defaultAdd', JSON.stringify(addressFormData));
+                    dispatch(isDefaultAdd(JSON.parse(localStorage.getItem('defaultAdd'))));
+                    copyDeliveryList[editedDataIndex] = ([])
+                    setDeliveryList([]);
+                    localStorage.setItem('deliveryAdd', JSON.stringify(deliverList));
+                    dispatch(updateDeliveryAdd(deliverList));
+                    setSnackbarState((pre) => { return { ...pre, open: true } });
+                    setTimeout(() => {
+                        props.setIsViewDelivery(true);
+                    }, 1500);
+                    dispatch(isAddressAdded(true));
+                    // console.log('Update address mode');
+                }
+            }
+            else {
+                copyDeliveryList[editedDataIndex] = { ...addressFormData };
+                setDeliveryList([...copyDeliveryList]);
+                setSnackbarState((pre) => { return { ...pre, open: true } });
+                setTimeout(() => {
+                    props.setIsViewDelivery(true);
+                }, 1500);
+                dispatch(isAddressAdded(true));
+                // console.log('Update address mode');
+            }
         }
         else {
-            setDeliveryList([...deliverList, addressFormData]);
-            setSnackbarState((pre) => { return { ...pre, open: true } });
-            setTimeout(() => {
-                props.setIsViewDelivery(true);
-            }, 1500);
-            dispatch(isAddressAdded(true));
-            // console.log('add new address mode');
+            if (addressFormData.isdefault_add) {
+                if (Object.keys(defaultAddress).length !== 0) {
+                    setDeliveryList([...deliverList, { ...defaultAddress, isdefault_add: false }]);
+                    localStorage.setItem('defaultAdd', JSON.stringify(addressFormData));
+                    dispatch(isDefaultAdd(JSON.parse(localStorage.getItem('defaultAdd'))));
+                    setSnackbarState((pre) => { return { ...pre, open: true } });
+                    setTimeout(() => {
+                        props.setIsViewDelivery(true);
+                    }, 1500);
+                    dispatch(isAddressAdded(true));
+                    // console.log('add new address mode');
+                }
+                else {
+                    localStorage.setItem('defaultAdd', JSON.stringify(addressFormData));
+                    dispatch(isDefaultAdd(JSON.parse(localStorage.getItem('defaultAdd'))));
+                    setSnackbarState((pre) => { return { ...pre, open: true } });
+                    setTimeout(() => {
+                        props.setIsViewDelivery(true);
+                    }, 1500);
+                    dispatch(isAddressAdded(true));
+                    // console.log('add new address mode');
+                }
+            }
+            else {
+                setDeliveryList([...deliverList, addressFormData]);
+                setSnackbarState((pre) => { return { ...pre, open: true } });
+                setTimeout(() => {
+                    props.setIsViewDelivery(true);
+                }, 1500);
+                dispatch(isAddressAdded(true));
+                // console.log('add new address mode');
+            }
         }
     }
     //Submit function Ends..
 
     //Function To fetch delivery address data based on id on edit click..
     async function fetchEditDeliveryAddressData() {
-        var editedData = await deliverList.find((data) => data.id === props.editDeliveryAddressId);
+        var editedData = await deliverList.find((data) => data.id === props.editDeliveryAddressId) || ((defaultAddress.id === props.editDeliveryAddressId) && { ...defaultAddress });
         if (editedData) {
             setAddressFormData({ ...editedData });
         }
@@ -152,10 +209,13 @@ export default function AddressForm(props) {
                         <FormSelectComponent fieldInfo={{ title: 'Country :', name: 'country', value: addressFormData.country, className: 'countryDropdownField', onchange: handleFormAddressChange }} />
                         {showProvince && <FormSelectComponent fieldInfo={{ title: 'Province :', name: 'province', value: addressFormData.province, optValue: ['new delhi', 'mumbai', 'pune', 'goa', 'madhya pradesh', 'uttar pradesh', 'bihar', 'jharkhand', 'chattisgarh', 'gujrat'], optText: ['New Delhi', 'Mumbai', 'Pune', 'Goa', 'Madhya Pradesh', 'Uttar Pradesh', 'Bihar', 'Jharkhand', 'Chattisgarh', 'Gujrat'], className: 'stateDropdownField', onchange: handleFormAddressChange }} />}
                     </div>
-                    <div className="addressDefaultCheckboxField">
-                        <input type="checkbox" name="default_address" className="addressDefaultCheckboxField" />
-                        <label htmlFor="default_address">Mark As Default Address</label>
-                    </div>
+                    {
+                        !addressFormData.isdefault_add &&
+                        <div className="addressDefaultCheckboxField">
+                            <input type="checkbox" id='default_address' name="default_address" className="addressDefaultCheckboxField" onChange={handleFormAddressChange} checked={addressFormData.isdefault_add} />
+                            <label htmlFor="default_address">Mark As Default Address</label>
+                        </div>
+                    }
                     <div className='delivertAddFormBtnStyle'>
                         <FormButtonComponent fieldInfo={{ title: 'Cancle', className: 'formCancelBtn', type: 'button', onclick: () => { props.setIsViewDelivery(true); dispatch(isAddressAdded(false)) } }} />
                         <FormButtonComponent fieldInfo={{ title: 'Save', className: 'formSaveBtn', type: 'Submit', disable: error }} />

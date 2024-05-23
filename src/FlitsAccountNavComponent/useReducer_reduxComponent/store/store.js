@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userReducer,{userinfo,isModify} from './features/userInfoSlicer/userinfoSlice';
-import deliveryAddReducer,{addDeliveryAdd,isAddressAdded,updateDeliveryAdd,deleteDeliveryAdd} from "./features/deliveryAddDataSlicer/deliveryAddSlice";
+import deliveryAddReducer,{addDeliveryAdd,isAddressAdded,updateDeliveryAdd,deleteDeliveryAdd,isDefaultAdd} from "./features/deliveryAddDataSlicer/deliveryAddSlice";
 
 export const store =configureStore({
     reducer:{
@@ -10,4 +10,4 @@ export const store =configureStore({
 });
 // console.log(store.getState())
 
-export {userinfo,isModify,addDeliveryAdd,isAddressAdded,updateDeliveryAdd,deleteDeliveryAdd};
+export {userinfo,isModify,addDeliveryAdd,isAddressAdded,updateDeliveryAdd,deleteDeliveryAdd,isDefaultAdd};

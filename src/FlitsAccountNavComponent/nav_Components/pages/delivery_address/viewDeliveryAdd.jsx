@@ -11,6 +11,7 @@ export default function ViewDeliveryAdd(props) {
     var { setIsViewDelivery, setIsAddNewAddress, setEditDeliveryAddressId, isAddNewAddress } = props;
     var deliveryAddData = (useSelector((state) => state.deliveryData.deliveryAddCollection));
     var isDeliveryAddAdded = (useSelector((state) => state.deliveryData.isAddress));
+    var defaultAddress = (useSelector((state) => state.deliveryData.defaultAddress));
     var dispatch = useDispatch();
     const [snackbarState, setSnackbarState] = useState({
         open: false,
@@ -52,7 +53,12 @@ export default function ViewDeliveryAdd(props) {
         }, 1100);
         setTimeout(() => {
             setIsDeleted('');
-        }, 2000)
+        }, 2800)
+    }
+
+    //Handling Bookmark or Default Address Functionality..
+    function handleDeliveryAddressBookmarkClick(id) {
+        console.log(id);
     }
 
     useEffect(() => {
@@ -70,11 +76,32 @@ export default function ViewDeliveryAdd(props) {
     return (
         <>
             <div>
-                <div>
-                    <FormButtonComponent fieldInfo={{
-                        title: <><img src="./images/icons/plus-circle.svg" alt="plus-icon" className="addPlusIcon" />
-                            <p className='addNewAddressBtn'>Add New Address</p></>, className: 'addNewAddBtnParentContainer', type: 'button', onclick: () => { setIsViewDelivery(false); setIsAddNewAddress(true) }
-                    }} />
+                <div className="addAddressAndDefaultAddParentContainer">
+                    <div className='addNewAddBtnParentContainer'>
+                        <FormButtonComponent fieldInfo={{
+                            title: <><img src="./images/icons/plus-circle.svg" alt="plus-icon" className="addPlusIcon" />
+                                <p className='addNewAddressBtn'>Add New Address</p></>, className: 'addNewAddBtnContainer', type: 'button', onclick: () => { setIsViewDelivery(false); setIsAddNewAddress(true) }
+                        }} />
+                    </div>
+                    {
+                        Object.keys(defaultAddress).length!==0 &&
+                        <div className="deliveryAddressDefaultContainer">
+                        <div key={defaultAddress?.id} >
+                            <h3>DEFAULT</h3>
+                            <p className="deliveryClientName">{`${defaultAddress?.first_name} ${defaultAddress?.last_name}`}</p>
+                            <p>{defaultAddress?.company}</p>
+                            <p>{defaultAddress?.add_line1}</p>
+                            <p>{defaultAddress?.add_line2}</p>
+                            <p>{defaultAddress?.postal_code} {defaultAddress?.city}</p>
+                            <p>{defaultAddress?.country}</p>
+                            <p>{defaultAddress?.country_callingcode}{defaultAddress?.contact_number}</p>
+                            <div className="editIconContainer" onClick={() => { setIsViewDelivery(false); setIsAddNewAddress(false); setEditDeliveryAddressId(defaultAddress.id) }}>
+                                <img src={'./images/icons/Pencil-Edit.png'} alt="editIcon" width={25} className="editIcon1" />
+                                <img src={'./images/icons/Pencil-Edit_black.png'} alt="editIconBlack" width={23} className="editIcon2" title="Edit" />
+                            </div>
+                        </div>
+                    </div>
+                    }
                 </div>
                 <div className="deliveryAddressListContainer">
                     {
@@ -95,6 +122,10 @@ export default function ViewDeliveryAdd(props) {
                                 <div className="trashIconContainer" onClick={() => { handleDeliveryAddressDeleteClick(address.id); setIsAddNewAddress('') }}>
                                     <img src={'./images/icons/Delete-Bin.svg'} alt="trashIcon" width={25} className="trashIcon1" />
                                     <img src={'./images/icons/Delete-Bin_black.png'} alt="trashIconBlack" width={23} className="trashIcon2" title="Delete" />
+                                </div>
+                                <div className="bookmarkIconContainer" onClick={() => { handleDeliveryAddressBookmarkClick(address.id); setIsAddNewAddress('') }}>
+                                    <img src={'./images/icons/bookmark.svg'} alt="bookmarkIcon" width={25} className="bookmarkIcon1" />
+                                    <img src={'./images/icons/Bookmark-Black.png'} alt="bookmarkIconBlack" width={23} className="bookmarkIcon2" title="Default" />
                                 </div>
                             </div>
                         )

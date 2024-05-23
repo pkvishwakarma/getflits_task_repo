@@ -2,13 +2,15 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState={
     deliveryAddCollection:[JSON.parse(localStorage.getItem('deliveryAdd'))],
-    isAddress:false
+    isAddress:false,
+    defaultAddress:{...JSON.parse(localStorage.getItem('defaultAdd'))}
 }
 
 export const deliveryAddSlice=createSlice({
     name:"delivery",
     initialState,
     reducers:{
+        //deliveryAddCollection Initial State Reducers starts..
         addDeliveryAdd:(state,action)=>{
             // console.log(action.payload);
             // const deliveryAddress={
@@ -30,21 +32,30 @@ export const deliveryAddSlice=createSlice({
 
         updateDeliveryAdd:(state,action)=>{
             // console.log(action.payload);
-            var editedIndex=state.deliveryAddCollection[0].findIndex((index)=>index.id===action.payload.id);
+            var editedIndex=state.deliveryAddCollection[0]?.findIndex((index)=>index.id===action.payload.id);
             if(editedIndex!==-1){
                 state.deliveryAddCollection[0][editedIndex]={...action.payload};
             }
         },
 
         deleteDeliveryAdd:(state,action)=>{
-            state.deliveryAddCollection[0]=state.deliveryAddCollection[0].filter((add)=>add.id!==action.payload);
+            state.deliveryAddCollection[0]=state.deliveryAddCollection[0]?.filter((add)=>add.id!==action.payload);
         },
+        //deliveryAddCollection Initial State Reducers Ends..
 
+        //isAddress Initial State Reducer Start..
         isAddressAdded:(state,action)=>{
             state.isAddress=action.payload;
+        },
+        //isAddress Initial State Reducer Ends..
+
+        //defaultAddress Initial State Reducer Start..
+        isDefaultAdd:(state,action)=>{
+            state.defaultAddress={...action.payload};
         }
+        //defaultAddress Initial State Reducer Ends..
     }
 });
 
-export const {addDeliveryAdd,isAddressAdded,updateDeliveryAdd,deleteDeliveryAdd}=deliveryAddSlice.actions;
+export const {addDeliveryAdd,isAddressAdded,updateDeliveryAdd,deleteDeliveryAdd,isDefaultAdd}=deliveryAddSlice.actions;
 export default deliveryAddSlice.reducer;
