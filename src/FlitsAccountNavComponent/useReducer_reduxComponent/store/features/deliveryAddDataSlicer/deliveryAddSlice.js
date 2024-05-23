@@ -2,8 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState={
     deliveryAddCollection:[JSON.parse(localStorage.getItem('deliveryAdd'))],
-    isAddress:false,
-    defaultAddress:{...JSON.parse(localStorage.getItem('defaultAdd'))}
+    isAddress:false
 }
 
 export const deliveryAddSlice=createSlice({
@@ -49,14 +48,8 @@ export const deliveryAddSlice=createSlice({
             state.isAddress=action.payload;
         },
         //isAddress Initial State Reducer Ends..
-
-        //defaultAddress Initial State Reducer Start..
-        isDefaultAdd:(state,action)=>{
-            state.defaultAddress={...action.payload};
-        }
-        //defaultAddress Initial State Reducer Ends..
     }
 });
 
-export const {addDeliveryAdd,isAddressAdded,updateDeliveryAdd,deleteDeliveryAdd,isDefaultAdd}=deliveryAddSlice.actions;
+export const {addDeliveryAdd,isAddressAdded,updateDeliveryAdd,deleteDeliveryAdd}=deliveryAddSlice.actions;
 export default deliveryAddSlice.reducer;

@@ -5,13 +5,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { Container, Pagination } from '@mui/material';
 import Slide from '@mui/material/Slide';
 import SnackbarReusableComponent from '../../../formReusableComponents/snackbarResuableComponent';
-import { deleteDeliveryAdd } from '../../../useReducer_reduxComponent/store/store'
+import { deleteDeliveryAdd,addDeliveryAdd } from '../../../useReducer_reduxComponent/store/store'
 
 export default function ViewDeliveryAdd(props) {
     var { setIsViewDelivery, setIsAddNewAddress, setEditDeliveryAddressId, isAddNewAddress } = props;
     var deliveryAddData = (useSelector((state) => state.deliveryData.deliveryAddCollection));
+    var generalDeliveryAdd = deliveryAddData[0]?.filter((data) => data.isdefault_add === false);
     var isDeliveryAddAdded = (useSelector((state) => state.deliveryData.isAddress));
-    var defaultAddress = (useSelector((state) => state.deliveryData.defaultAddress));
+    var defaultAddress = deliveryAddData[0]?.find((data) => data.isdefault_add === true) || {};
     var dispatch = useDispatch();
     const [snackbarState, setSnackbarState] = useState({
         open: false,
@@ -23,7 +24,7 @@ export default function ViewDeliveryAdd(props) {
     const addressesPerPage = 6;
     var indexOfLastAddress = page * addressesPerPage;
     var indexOfFirstAddress = indexOfLastAddress - addressesPerPage;
-    var currentAddresses = deliveryAddData[0]?.slice(indexOfFirstAddress, indexOfLastAddress);
+    var currentAddresses = generalDeliveryAdd?.slice(indexOfFirstAddress, indexOfLastAddress);
 
     //Handling Pagination Change..
     const handleChangePage = (event, newPage) => {
@@ -35,7 +36,7 @@ export default function ViewDeliveryAdd(props) {
     //Handle Delete Functionality for Delivery Address component..
     async function handleDeliveryAddressDeleteClick(id) {
         var copyDeliveryAddData = [...deliveryAddData[0]];
-        var filteredAddressAfterDelete = copyDeliveryAddData.filter((add) => add.id !== id);
+        var filteredAddressAfterDelete = copyDeliveryAddData?.filter((add) => add.id !== id);
         var deleteAlert = window.confirm(`Are you sure you want to delete this address?`);
         if (deleteAlert) {
             localStorage.setItem('deliveryAdd', JSON.stringify(filteredAddressAfterDelete));
@@ -58,14 +59,27 @@ export default function ViewDeliveryAdd(props) {
 
     //Handling Bookmark or Default Address Functionality..
     function handleDeliveryAddressBookmarkClick(id) {
-        console.log(id);
+        var copyDeliveryAddData = [...deliveryAddData[0]];
+        var bookmarkAddress = copyDeliveryAddData.map((data) => {
+            if (data.id === id) {
+                return { ...data, isdefault_add: true };
+            }
+            else {
+                return { ...data, isdefault_add: false };
+            }
+        })
+        localStorage.setItem('deliveryAdd', JSON.stringify(bookmarkAddress));
+        dispatch(addDeliveryAdd(JSON.parse(localStorage.getItem('deliveryAdd'))));
     }
 
     useEffect(() => {
         // console.log(deliveryAddData[0]);
+        // console.log(defaultAddress);
+        // console.log(generalDeliveryAdd);
+        // console.log(currentAddresses);
         try {
             if (!deliveryAddData) {
-                currentAddresses = deliveryAddData[0]?.slice(indexOfFirstAddress, indexOfLastAddress)
+                currentAddresses = generalDeliveryAdd?.slice(indexOfFirstAddress, indexOfLastAddress);
             }
             isDeliveryAddAdded && setSnackbarState((pre) => { return { ...pre, open: true } });
         } catch (error) {
@@ -84,23 +98,23 @@ export default function ViewDeliveryAdd(props) {
                         }} />
                     </div>
                     {
-                        Object.keys(defaultAddress).length!==0 &&
+                        Object.keys(defaultAddress)?.length !== 0 &&
                         <div className="deliveryAddressDefaultContainer">
-                        <div key={defaultAddress?.id} >
-                            <h3>DEFAULT</h3>
-                            <p className="deliveryClientName">{`${defaultAddress?.first_name} ${defaultAddress?.last_name}`}</p>
-                            <p>{defaultAddress?.company}</p>
-                            <p>{defaultAddress?.add_line1}</p>
-                            <p>{defaultAddress?.add_line2}</p>
-                            <p>{defaultAddress?.postal_code} {defaultAddress?.city}</p>
-                            <p>{defaultAddress?.country}</p>
-                            <p>{defaultAddress?.country_callingcode}{defaultAddress?.contact_number}</p>
-                            <div className="editIconContainer" onClick={() => { setIsViewDelivery(false); setIsAddNewAddress(false); setEditDeliveryAddressId(defaultAddress.id) }}>
-                                <img src={'./images/icons/Pencil-Edit.png'} alt="editIcon" width={25} className="editIcon1" />
-                                <img src={'./images/icons/Pencil-Edit_black.png'} alt="editIconBlack" width={23} className="editIcon2" title="Edit" />
+                            <div key={defaultAddress?.id} >
+                                <h3>DEFAULT</h3>
+                                <p className="deliveryClientName">{`${defaultAddress?.first_name} ${defaultAddress?.last_name}`}</p>
+                                <p>{defaultAddress?.company}</p>
+                                <p>{defaultAddress?.add_line1}</p>
+                                <p>{defaultAddress?.add_line2}</p>
+                                <p>{defaultAddress?.postal_code} {defaultAddress?.city}</p>
+                                <p>{defaultAddress?.country}</p>
+                                <p>{defaultAddress?.country_callingcode}{defaultAddress?.contact_number}</p>
+                                <div className="editIconContainer" onClick={() => { setIsViewDelivery(false); setIsAddNewAddress(false); setEditDeliveryAddressId(defaultAddress.id) }}>
+                                    <img src={'./images/icons/Pencil-Edit.png'} alt="editIcon" width={25} className="editIcon1" />
+                                    <img src={'./images/icons/Pencil-Edit_black.png'} alt="editIconBlack" width={23} className="editIcon2" title="Edit" />
+                                </div>
                             </div>
                         </div>
-                    </div>
                     }
                 </div>
                 <div className="deliveryAddressListContainer">
@@ -134,7 +148,7 @@ export default function ViewDeliveryAdd(props) {
                 <div className="paginationContainer">
                     <div>
                         {
-                            deliveryAddData[0]?.length > 6 &&
+                            generalDeliveryAdd?.length > 6 &&
                             <Container>
                                 <Pagination
                                     count={Math.ceil(deliveryAddData[0]?.length / addressesPerPage)}
