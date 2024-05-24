@@ -26,7 +26,7 @@ export const deliveryAddSlice=createSlice({
             //     province:action.payload.province
             // }
             // state.deliveryAddCollection.push(deliveryAddress);
-            state.deliveryAddCollection=[action.payload]
+            state.deliveryAddCollection=[action.payload];
         },
         
         updateDeliveryAdd:(state,action)=>{

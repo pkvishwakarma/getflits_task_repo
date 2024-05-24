@@ -40,6 +40,7 @@ export default function AddressForm(props) {
     });
     const [deliverList, setDeliveryList] = useState(FetchDeliveryDataFromLocalStorage());
     var dispatch = useDispatch();
+    // const [defaultAddressCheckboxChecked,setDefaultAddressCheckboxChecked]=useState(false);
     const [snackbarState, setSnackbarState] = useState({
         open: false,
         Transition: Slide,
@@ -78,21 +79,32 @@ export default function AddressForm(props) {
         var copyDeliveryList = [...deliverList];
         if (editedDataIndex !== -1) {
             copyDeliveryList[editedDataIndex] = { ...addressFormData };
-            var updateAddressList = copyDeliveryList.map((data) => {
-                if (data.id === props.editDeliveryAddressId) {
-                    return { ...data, isdefault_add: true }
-                }
-                else {
-                    return { ...data, isdefault_add: false }
-                }
-            });
-            setDeliveryList([...updateAddressList]);
-            setSnackbarState((pre) => { return { ...pre, open: true } });
-            setTimeout(() => {
-                props.setIsViewDelivery(true);
-            }, 1500);
-            dispatch(isAddressAdded(true));
-            // console.log('Update address mode');
+            if(addressFormData.isdefault_add){
+                var updateAddressList = copyDeliveryList.map((data) => {
+                    if (data.id === props.editDeliveryAddressId) {
+                        return { ...data, isdefault_add: true }
+                    }
+                    else {
+                        return { ...data, isdefault_add: false }
+                    }
+                });
+                setDeliveryList([...updateAddressList]);
+                setSnackbarState((pre) => { return { ...pre, open: true } });
+                setTimeout(() => {
+                    props.setIsViewDelivery(true);
+                }, 1500);
+                dispatch(isAddressAdded(true));
+                // console.log('Update address mode');
+            }
+            else{
+                setDeliveryList([...copyDeliveryList]);
+                setSnackbarState((pre) => { return { ...pre, open: true } });
+                setTimeout(() => {
+                    props.setIsViewDelivery(true);
+                }, 1500);
+                dispatch(isAddressAdded(true));
+                // console.log('Update address mode');
+            }
         }
         else {
             // setDeliveryList([...deliverList, addressFormData]);
