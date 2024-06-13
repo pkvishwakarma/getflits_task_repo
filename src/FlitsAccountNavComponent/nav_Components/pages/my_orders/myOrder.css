@@ -143,7 +143,7 @@
   }
 
 .order-details-expand{
-    height: 43vh;
+    height: 50vh;
     overflow:visible;
     transition: height 0.5s ease;
 }

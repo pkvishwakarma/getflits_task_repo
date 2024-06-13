@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
-import { HashRouter } from 'react-router-dom';
+// import { HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './FlitsAccountNavComponent/useReducer_reduxComponent/store/store';
 
@@ -20,22 +20,22 @@ root.render(
 );
 
 // This code is used to render react application on shopify liquid theme.. 
-window.renderApp = (elementId) => {
-  const rootElement = document.getElementById(elementId);
-  if (rootElement) {
-    ReactDOM.render(<React.StrictMode>
-      {/* <BrowserRouter> */}
-      <HashRouter>
-        <Provider store={store}>
-          <App />
-        </Provider>
-        </HashRouter>
-      {/* </BrowserRouter> */}
-    </React.StrictMode>, rootElement);
-  } else {
-    console.error(`No element found with id ${elementId}`);
-  }
-};
+// window.renderApp = (elementId) => {
+//   const rootElement = document.getElementById(elementId);
+//   if (rootElement) {
+//     ReactDOM.render(<React.StrictMode>
+//       {/* <BrowserRouter> */}
+//       <HashRouter>
+//         <Provider store={store}>
+//           <App />
+//         </Provider>
+//         </HashRouter>
+//       {/* </BrowserRouter> */}
+//     </React.StrictMode>, rootElement);
+//   } else {
+//     console.error(`No element found with id ${elementId}`);
+//   }
+// };
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
