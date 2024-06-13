@@ -4,7 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import Navbar from './navbar';
 import MyProfile from './nav_Components/pages/myprofile/myprofile';
 import DeliveryAdd from './nav_Components/pages/delivery_address/deliveryAdd';
-import MyOrder from './nav_Components/pages/myOrders';
+import MyOrder from './nav_Components/pages/my_orders/myOrders';
 import TopOrderedProduct from './nav_Components/pages/topOrderedProduct';
 import MyWishlist from './nav_Components/pages/myWishlist';
 import MyCredit from './nav_Components/pages/myCredit';
@@ -25,7 +25,7 @@ export default function FlitsHomePage() {
     },[])
     return (
         <>
-            <div className='homepageHeading'>Welcome to our store</div>
+            {/* <div className='homepageHeading'>Welcome to our store</div>
             <div className='headerContainer'>
                 <div className='headerTitle'>flits-support-workplace-15</div>
                 <div className='optionContainer'>
@@ -34,7 +34,7 @@ export default function FlitsHomePage() {
                 <div className='iconsContainer'>
                     <span className='searchIcon'>Search</span><span className='userIcon'>User</span><span className='cartIcon'>Cart</span>
                 </div>
-            </div>
+            </div> */}
             <Routes>
                 <Route path='/' element={<Navbar />}>
                     <Route path='/' element={<MyProfile />} />

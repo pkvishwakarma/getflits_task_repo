@@ -1,0 +1,149 @@
+.orderMainContainer {
+    border: 1px solid rgb(142, 142, 142);
+    width: 90%;
+    border-radius: 5px;
+    padding: 1em;
+    height: max-content;
+    margin-bottom: 1em;
+}
+
+.grandTotalChildContainer,
+.orderChildContainer,
+.dateChildContainer,
+.fulfillmentChildContainer,
+.itemChildContainer,
+.financialStatusChildContainer {
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+.orderFirstContainer,
+.orderSecondContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.brLineStyle {
+    border: 0.1px solid rgb(142, 142, 142);
+    margin: 1em 0px;
+}
+
+.dateContainer,
+.itemContainer {
+    margin: 0.6em 0px;
+}
+
+.orderThirdContainer {
+    display: grid;
+    grid-template-columns: 1.2fr 10.8fr;
+    border: 1px solid rgb(142, 142, 142);
+    margin-top: 1em;
+    border-radius: 5px;
+}
+
+.productImgContainer {
+    border-right: 1px solid rgb(142, 142, 142);
+    padding: 1em 0.5em;
+    /* width: 100%; */
+    text-align: center;
+}
+
+.productDetailContaienr {
+    padding: 1em 0.5em;
+    /* width: 100%; */
+}
+
+.productDetailSubtotalChildContainer {
+    margin-top: 1em;
+}
+
+.orderBtnContainer{
+    text-align: right;
+}
+
+.orderBtn {
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    padding: 10px 20px;
+    color: rgb(32, 2, 100);
+    border: 1px solid rgb(32, 2, 100);
+    font-weight: 700;
+    margin: 1.2em 0px;
+    cursor: pointer;
+}
+
+.orderBtn:hover{
+    background-color: rgb(32, 2, 100);
+    border-radius: 5px;
+    padding: 10px 20px;
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(32, 2, 100);
+    font-weight: 700;
+    /* margin-top: 1.2em; */
+    cursor: pointer;
+    /* margin-right: 0.8em; */
+}
+
+.orderAddParentContainer{
+    border-top: 1px solid rgb(142, 142, 142);
+    border-bottom: 1px solid rgb(142, 142, 142);
+    padding: 0.8em 0px;
+    display: grid;
+    grid-template-columns: 6fr 6fr;
+}
+
+.orderShippingAddContainer{
+    border-right: 1px solid rgb(142, 142, 142);
+    padding: 0.8em;
+}
+
+.orderBillingAddContainer{
+    padding: 0.8em;
+}
+
+.orderShippingAddChildLabelContainer, .orderBillingAddChildLabelContainer{
+    font-weight: 700;
+    margin-bottom: 0.6em;
+}
+
+.orderShippingAddChildValueContainer, .orderBillingAddChildValueContainer{
+    width: 50%;
+    line-height:1.5em;
+}
+
+.costBreakupParentContainer{
+    padding: 0px 1em;
+}
+
+.orderCostBreakupContainer{
+    font-weight:700;
+    margin-top: 1em;
+}
+
+.orderSubTotalContainer, .orderIgstContainer, .orderShippingCostContainer, .orderGrandTotalContainer, .orderPaymentTypeContainer{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1em;
+}
+
+.orderShippingCostContainer{
+    border-bottom: 1px solid rgb(142, 142, 142);
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+}
+
+.fontWeightStyle{
+    font-weight: 700;
+}
+
+.order-details-collapse {
+    height:0vh;
+    overflow: hidden;
+    transition: height 0.5s ease;
+  }
+
+.order-details-expand{
+    height: 43vh;
+    overflow:visible;
+    transition: height 0.5s ease;
+}
