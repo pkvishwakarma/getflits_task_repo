@@ -1,0 +1,171 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+
+  .contactUsSvgContainer{
+    align-items:center;
+    background: rgb(32, 2, 100);
+    border-radius: 100px;
+    box-shadow: 0 0 8px #5fbeaa6e;
+    display: flex;
+    height: 70px;
+    justify-content: center;
+    /* position:absolute; */
+    text-align: center;
+    /* top: -35; */
+    width: 70px;
+  }
+
+  .contactUsSvgLegend{
+    margin: auto;
+  }
+  
+  .modal {
+    background: white;
+    border: transparent;
+    border-radius: 10px;
+    padding: 20px;
+    width: 35vw;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+  
+  .close-button {
+    position: absolute;
+    top: -20px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    font-size: 2em;
+    cursor: pointer;
+  }
+
+  .contactUsFormTitle{
+    text-align: center;
+  }
+  
+  .contactUsHeaderTag {
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: 250;
+  }
+  
+  ContactUsParaTag {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: gray;
+  }
+  
+  .contactInputFieldParentContainer{
+    display: flex;
+    margin-top: 1.2em;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  .fNameInputField,.lNameInputField, .emailInputField{
+    width: 95%;
+    outline: unset;
+    border: 0.3px solid rgba(0, 0, 0, 0.582);
+    padding: 10px 8px;
+    border-radius: 7px;
+    margin-top: 0.4em;
+    margin-bottom: 0.8em;
+}
+  
+  /* label {
+    display: block;
+    margin-bottom: 5px;
+  } */
+  
+  input,
+  textarea,
+  select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  input[type="url"]::placeholder {
+    font-size: 12px;
+  }
+  
+  button.submit-button {
+    width: 100%;
+    padding: 10px;
+    background: #004085;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  button.submit-button:hover {
+    background: #003065;
+  }
+
+  .contactInputContainer{
+    width: 30vw;
+  }
+
+  .contactFormContact_parent{
+    display: flex;
+    width:95%;
+    border: 0.3px solid rgba(0, 0, 0, 0.582);
+    outline: unset;
+    border-radius: 7px;
+    margin-top: 0.4em;
+    margin-bottom: 0.8em;
+}
+
+.contactFormContact_parent input[type='text']{
+    width: 50px;
+    font-size: 16px;
+    outline: unset;
+    border: none;
+    text-align: start;
+}
+
+.contactFormContact_parent input[type="tel"] {
+    width: 58%;
+    font-size: 16px;
+    outline: unset;
+    border: none;
+}
+
+.contactFormCountry-selector {
+    width: 55px;
+    font-size: 16px;
+    position: relative;
+}
+
+.contactFormCountryDropdown{
+    width: 65px;
+    padding: 8px;
+    font-size: 16px;
+    outline: unset;
+    border: none;
+    border-left: 0.3px solid rgba(0, 0, 0, 0.582);
+}
+
+.contactFormCountryDropdown~span {
+    position: absolute;
+    top: 5px;
+    left: 10px;
+}
+  
